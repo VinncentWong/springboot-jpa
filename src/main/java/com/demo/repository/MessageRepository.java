@@ -1,7 +1,10 @@
 package com.demo.repository;
 
+import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -18,4 +21,10 @@ public interface MessageRepository extends CrudRepository<Message, Long>{
 	 */
 	@Query("SELECT * FROM Message WHERE Message.messageId = ?1") 
 	Optional<Message> findMessageByContent(String content);
+	
+	// For Sorting
+	List<Message> findListMessage(Sort sort);
+	
+	// For Pagination -> We use interface in the repo, but in the implementation, we use PageRequest class
+	List<Message> findListMessageByPagination(Pageable page);
 }
