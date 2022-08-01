@@ -3,11 +3,16 @@ package com.demo.entities;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -33,13 +38,24 @@ public class Message {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private Long messageId;
 	
+	@ColumnDefault("Tidak ada konten") // Default value
 	private String content;
 	
 	@CreationTimestamp // Tell hibernate that once this entity is created, createdAt will updated
+	@Temporal(TemporalType.DATE) // Tell to hibernate to save the createdAt to database on DATE type
 	private LocalDate createdAt;
 	
 	@UpdateTimestamp // Tell hibernate that once this entity is updated, updatedAt will updated
 	private LocalDate updatedAt;
 	
-	
+	/*
+	 * If we don't specify @Enumerated, then status will be keep by its ordinal
+	 * (The default is @Enumerated(EnumType.ORDINAL))
+	 */
+	@Enumerated(EnumType.STRING)
+	private Status status;
+}
+
+enum Status{
+	OK, PENDING, CANCEL;
 }
