@@ -1,8 +1,15 @@
 package com.demo.entities;
 
+import java.time.LocalDate;
+
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import lombok.Data;
 
@@ -14,7 +21,25 @@ public class Message {
 	 * Every entity class must have an Id
 	 */
 	@Id
+	/*
+	 * GeneratedValue tells Hibernate that this column is auto-increment
+	 * There are several strategies to GeneratedValue
+	 * 1. Auto -> Hibernate ask SQL which of 3 strategy is the best one for the current situation
+	 * 2. Identity -> Hibernate generate a special key in that tabel that is auto-increment
+	 * 3. Sequence -> Hibernate generate a Sequence(sequence name is HIBERNATE_SEQUENCE) in our database. 
+	 * 				  Every INSERT will update the sequence
+	 * 4. Table -> Hibernate generate an extra table that holds our numeric primary key.
+	 */
+	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private Long messageId;
 	
 	private String content;
+	
+	@CreationTimestamp // Tell hibernate that once this entity is created, createdAt will updated
+	private LocalDate createdAt;
+	
+	@UpdateTimestamp // Tell hibernate that once this entity is updated, updatedAt will updated
+	private LocalDate updatedAt;
+	
+	
 }
