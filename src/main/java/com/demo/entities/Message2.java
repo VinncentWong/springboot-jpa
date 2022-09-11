@@ -1,5 +1,6 @@
 package com.demo.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,6 +21,6 @@ public class Message2 {
 	
 	private String content;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private Email email;
 }

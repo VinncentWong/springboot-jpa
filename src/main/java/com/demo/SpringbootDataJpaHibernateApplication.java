@@ -1,35 +1,29 @@
 package com.demo;
 
+import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
+import org.hibernate.validator.internal.util.stereotypes.Lazy;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.demo.entities.Email;
 import com.demo.entities.Message2;
+import com.demo.repository.Message2Repository;
+import com.demo.repository.MessageRepository;
 import com.zaxxer.hikari.HikariDataSource;
 
-@Configuration
 @SpringBootApplication
-@RestController
 public class SpringbootDataJpaHibernateApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringbootDataJpaHibernateApplication.class, args);
-	}
-	
-	@Bean
-	public DataSource dataSource() {
-		HikariDataSource hikari = new HikariDataSource();
-		hikari.setJdbcUrl("jdbc:mysql://localhost:3306/hibernate");
-		hikari.setUsername("root");
-		hikari.setPassword("");
-		hikari.setConnectionTimeout(3000);
-		return hikari;
 	}
 	
 	/*
@@ -59,13 +53,46 @@ public class SpringbootDataJpaHibernateApplication {
 	 * JDBC Driver is not only the way to connect to Database, we can connect to database through 
 	 * Hibernate -> Hibernate also provide the implementation of the database
 	 */
+}
+
+@RestController
+class ControllerCustom{
+
+	@Autowired
+	private Coba coba;
 	
 	@GetMapping("/callone")
+	public void callOne() {
+		this.coba.callOne();
+	}
+}
+
+@Component
+class Coba{
+	
+	@Autowired
+	private Message2Repository repository;
+	
 	public void callOne() {
 		Message2 message2 = new Message2();
 		Email email = new Email();
 		message2.setContent("content1");
 		email.setSubject("centcentcent");
 		message2.setEmail(email);
+		this.repository.save(message2);
+	}
+}
+
+@Configuration
+class Config{
+	
+	@Bean
+	public DataSource dataSource() {
+		HikariDataSource hikari = new HikariDataSource();
+		hikari.setJdbcUrl("jdbc:mysql://localhost:3306/hibernate");
+		hikari.setUsername("root");
+		hikari.setPassword("");
+		hikari.setConnectionTimeout(3000);
+		return hikari;
 	}
 }
