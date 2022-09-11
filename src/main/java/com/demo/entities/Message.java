@@ -1,7 +1,9 @@
 package com.demo.entities;
 
 import java.time.LocalDate;
+import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -36,14 +38,16 @@ public class Message {
 	 * 4. Table -> Hibernate generate an extra table that holds our numeric primary key.
 	 */
 	@GeneratedValue(strategy = GenerationType.IDENTITY) 
+	@Column(name = "message_id")
 	private Long messageId;
 	
 	@ColumnDefault("Tidak ada konten") // Default value
+	@Column(name = "konten")
 	private String content;
 	
 	@CreationTimestamp // Tell hibernate that once this entity is created, createdAt will updated
 	@Temporal(TemporalType.DATE) // Tell to hibernate to save the createdAt to database on DATE type
-	private LocalDate createdAt;
+	private Date createdAt;
 	
 	@UpdateTimestamp // Tell hibernate that once this entity is updated, updatedAt will updated
 	private LocalDate updatedAt;

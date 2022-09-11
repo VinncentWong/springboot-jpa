@@ -19,12 +19,12 @@ public interface MessageRepository extends CrudRepository<Message, Long>{
 	 *  will make the name of the method more complex
 	 *  We can add native query = true if we want the query is follow the SQL syntax
 	 */
-	@Query("SELECT * FROM Message WHERE Message.messageId = ?1") 
+	@Query(value = "SELECT * FROM Message WHERE message_id = ?1", nativeQuery = true) 
 	Optional<Message> findMessageByContent(String content);
 	
 	// For Sorting
-	List<Message> findListMessage(Sort sort);
+//	List<Message> findListMessage(Sort sort);
 	
 	// For Pagination -> We use interface in the repo, but in the implementation, we use PageRequest class
-	List<Message> findListMessageByPagination(Pageable page);
+//	List<Message> findListMessageByPagination(Pageable page);
 }
