@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.demo.entities.Email;
 import com.demo.entities.Message2;
+import com.demo.repository.EmailRepository;
 import com.demo.repository.Message2Repository;
 import com.demo.repository.MessageRepository;
 import com.zaxxer.hikari.HikariDataSource;
@@ -65,6 +66,11 @@ class ControllerCustom{
 	public void callOne() {
 		this.coba.callOne();
 	}
+	
+	@GetMapping("/calltwo")
+	public void callTwo() {
+		this.coba.callTwo();
+	}
 }
 
 @Component
@@ -73,6 +79,9 @@ class Coba{
 	@Autowired
 	private Message2Repository repository;
 	
+	@Autowired
+	private EmailRepository emailRepo;
+	
 	public void callOne() {
 		Message2 message2 = new Message2();
 		Email email = new Email();
@@ -80,6 +89,15 @@ class Coba{
 		email.setSubject("centcentcent");
 		message2.setEmail(email);
 		this.repository.save(message2);
+	}
+	
+	public void callTwo() {
+		Email email = new Email();
+		email.setSubject("subject");
+		Message2 message = new Message2();
+		message.setContent("centwong");
+		email.setMessage(message);
+		this.emailRepo.save(email);
 	}
 }
 
