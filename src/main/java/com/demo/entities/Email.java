@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 import lombok.ToString;
 
@@ -22,5 +24,6 @@ public class Email {
 	private String subject;
 	
 	@OneToOne(mappedBy = "email", cascade = CascadeType.ALL)
+	@JsonIgnore
 	private Message2 message;
 }

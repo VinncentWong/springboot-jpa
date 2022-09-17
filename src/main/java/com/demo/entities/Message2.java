@@ -24,3 +24,8 @@ public class Message2 {
 	@OneToOne(cascade = CascadeType.ALL)
 	private Email email;
 }
+
+/*
+ * Intiny adalah ketika kita set itu cascade type ALL, maka nanti ketika parent melakukan save, nanti children nya SEMUA AKAN DISAVE BARENGAN
+ * mappedBy digunakan untuk menentukan bidirectional relationship yang nantinya parent tau children nya dan juga children tau parent nya
+*/

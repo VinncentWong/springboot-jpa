@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.demo.entities.Email;
@@ -71,6 +72,11 @@ class ControllerCustom{
 	public void callTwo() {
 		this.coba.callTwo();
 	}
+	
+	@GetMapping("/getmessage/{emailId}")
+	public Message2 getEmail(@PathVariable("emailId") Long id) {
+		return this.coba.getMessage(id);
+	}
 }
 
 @Component
@@ -96,8 +102,13 @@ class Coba{
 		email.setSubject("subject");
 		Message2 message = new Message2();
 		message.setContent("centwong");
+		message.setEmail(email);
 		email.setMessage(message);
 		this.emailRepo.save(email);
+	}
+	
+	public Message2 getMessage(Long messageId) {
+		return this.repository.findById(messageId).get();
 	}
 }
 
