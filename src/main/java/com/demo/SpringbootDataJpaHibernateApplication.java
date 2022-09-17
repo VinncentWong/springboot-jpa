@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.demo.entities.Email;
+import com.demo.entities.Location;
 import com.demo.entities.Message2;
 import com.demo.repository.EmailRepository;
+import com.demo.repository.LocationRepository;
 import com.demo.repository.Message2Repository;
 import com.demo.repository.MessageRepository;
 import com.zaxxer.hikari.HikariDataSource;
@@ -73,9 +75,19 @@ class ControllerCustom{
 		this.coba.callTwo();
 	}
 	
-	@GetMapping("/getmessage/{emailId}")
-	public Message2 getEmail(@PathVariable("emailId") Long id) {
+	@GetMapping("/getmessage/{messageId}")
+	public Message2 getMessage(@PathVariable("messageId") Long id) {
 		return this.coba.getMessage(id);
+	}
+	
+	@GetMapping("/getemail/{emailId}")
+	public Email getEmail(@PathVariable("emailId") Long id){
+		return this.coba.getEmail(id);
+	}
+	
+	@GetMapping("/createlocation/{emailId}")
+	public void createLocation(@PathVariable("emailId") Long id) {
+		this.coba.createLocation(id);
 	}
 }
 
@@ -87,6 +99,9 @@ class Coba{
 	
 	@Autowired
 	private EmailRepository emailRepo;
+	
+	@Autowired
+	private LocationRepository locationRepo;
 	
 	public void callOne() {
 		Message2 message2 = new Message2();
@@ -109,6 +124,18 @@ class Coba{
 	
 	public Message2 getMessage(Long messageId) {
 		return this.repository.findById(messageId).get();
+	}
+	
+	public Email getEmail(Long id) {
+		return this.emailRepo.findById(id).get();
+	}
+	
+	public void createLocation(Long emailId) {
+		Email email = this.emailRepo.findById(emailId).get();
+		Location location = new Location();
+		location.setLocation("jekarta");
+		location.setEmail(email);
+		this.locationRepo.save(location);
 	}
 }
 

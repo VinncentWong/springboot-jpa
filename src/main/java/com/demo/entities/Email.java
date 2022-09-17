@@ -1,10 +1,13 @@
 package com.demo.entities;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -24,6 +27,8 @@ public class Email {
 	private String subject;
 	
 	@OneToOne(mappedBy = "email", cascade = CascadeType.ALL)
-	@JsonIgnore
 	private Message2 message;
+	
+	@OneToMany(mappedBy = "email", cascade = CascadeType.ALL)
+	private List<Location> location;
 }
