@@ -1,5 +1,8 @@
 package com.demo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
@@ -89,6 +92,11 @@ class ControllerCustom{
 	public void createLocation(@PathVariable("emailId") Long id) {
 		this.coba.createLocation(id);
 	}
+	
+	@GetMapping("/createlocation2/{emailId}")
+	public void createLocation2(@PathVariable("emailId") Long id) {
+		this.coba.createLocation2(id);
+	}
 }
 
 @Component
@@ -136,6 +144,20 @@ class Coba{
 		location.setLocation("jekarta");
 		location.setEmail(email);
 		this.locationRepo.save(location);
+	}
+	
+	public void createLocation2(Long emailId) {
+		// ketika ada 2 entitas yang saling terhubung, entitas di dalam kelas tersebut harus saling diatur bersamaan
+		Email email = this.emailRepo.findById(emailId).get();
+		Location location = new Location(); // every time make new Object, new generated ID will be assigned to new object that instantiated
+		location.setLocation("jekarta2");
+		location.setEmail(email);
+		var list = new ArrayList<Location>();
+		list.add(location);
+		email.setLocation(list);
+		var e = this.emailRepo.save(email);
+		System.out.println(e.toString());
+		System.out.println(email.toString());
 	}
 }
 
