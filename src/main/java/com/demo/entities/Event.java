@@ -8,7 +8,10 @@ import javax.persistence.Id;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import lombok.Data;
+
 @Entity
+@Data
 public class Event {
 
 	@Id

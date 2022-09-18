@@ -118,6 +118,11 @@ class ControllerCustom{
 	public void createEvent() {
 		this.coba.createEvent();
 	}
+	
+	@GetMapping("/getevent")
+	public Iterable<String> getEvent(){
+		return this.coba.getEvents();
+	}
 }
 
 @Component
@@ -211,6 +216,12 @@ class Coba{
 	public void createEvent() {
 		Event event = new Event();
 		this.eventRepo.save(event);
+	}
+	
+	public Iterable<String> getEvents() {
+		List<String> list = new ArrayList<>();
+		this.eventRepo.findAll().forEach((event) -> list.add(event.getId().toString()));
+		return list;
 	}
 }
 
