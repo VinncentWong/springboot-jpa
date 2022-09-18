@@ -2,22 +2,25 @@ package com.demo.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.TableGenerator;
 
 @Entity
 public class Person {
 
-	private String personNumber;
+	private Long personNumber;
 	
-	public void setPersonNumber(String personNumber) {
+	public void setPersonNumber(Long personNumber) {
 		this.personNumber = personNumber;
 	}
 	
 	@Id
-	@GeneratedValue(generator = "ID_GENERATOR") // specify nama dari generator yang akan digunakan
-	@SequenceGenerator(name = "ID_GENERATOR", sequenceName = "GET_PERSON_NUMBER")
-	public String getPersonNumber() {
+	@GeneratedValue(generator = "ID_GENERATOR", strategy = GenerationType.TABLE) // specify nama dari generator yang akan digunakan
+//	@SequenceGenerator(name = "ID_GENERATOR", sequenceName = "GET_PERSON_NUMBER") // karena strategy pakai Table, pakai @TableGenerator buat handle masalah
+	@TableGenerator(name = "ID_GENERATOR", pkColumnName = "primary_key")
+	public Long getPersonNumber() {
 		return this.personNumber;
 	}
 	// @Id juga bisa ditaruh pada accessor atau mutator atau getter, nanti akan dipanggil oleh Hibernate

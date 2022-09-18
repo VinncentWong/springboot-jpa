@@ -20,10 +20,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.demo.entities.Email;
 import com.demo.entities.Location;
 import com.demo.entities.Message2;
+import com.demo.entities.Person;
+import com.demo.entities.Teacher;
 import com.demo.repository.EmailRepository;
 import com.demo.repository.LocationRepository;
 import com.demo.repository.Message2Repository;
 import com.demo.repository.MessageRepository;
+import com.demo.repository.PersonRepository;
+import com.demo.repository.TeacherRepository;
 import com.zaxxer.hikari.HikariDataSource;
 
 @SpringBootApplication
@@ -97,6 +101,16 @@ class ControllerCustom{
 	public void createLocation2(@PathVariable("emailId") Long id) {
 		this.coba.createLocation2(id);
 	}
+	
+	@GetMapping("/createperson")
+	public void createPerson() {
+		this.coba.createPerson();
+	}
+	
+	@GetMapping("/createteacher")
+	public void createTeacher() {
+		this.coba.createTeacher();
+	}
 }
 
 @Component
@@ -110,6 +124,12 @@ class Coba{
 	
 	@Autowired
 	private LocationRepository locationRepo;
+	
+	@Autowired
+	private PersonRepository personRepo;
+	
+	@Autowired
+	private TeacherRepository teacherRepo;
 	
 	public void callOne() {
 		Message2 message2 = new Message2();
@@ -158,6 +178,17 @@ class Coba{
 		var e = this.emailRepo.save(email);
 		System.out.println(e.toString());
 		System.out.println(email.toString());
+	}
+	
+	public void createPerson() {
+		Person person = new Person();
+//		person.setPersonNumber("abcdefghijk");
+		this.personRepo.save(person);
+	}
+	
+	public void createTeacher() {
+		Teacher teacher = new Teacher();
+		this.teacherRepo.save(teacher);
 	}
 }
 
