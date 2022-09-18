@@ -17,5 +17,7 @@ public class Event {
 	@Id
 	@GeneratedValue(generator = "UUID")
 	@GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+	// strategy mengarah pada kelas Generator nya
+	// Kelas nya itu menyediakan cara buat generate identifier, dalam kasus ini dia menyediakan cara buat generate UUID
 	private UUID id;
 }
