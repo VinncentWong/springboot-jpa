@@ -7,12 +7,15 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.TableGenerator;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity
 public class Person {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE, generator = "ID_GENERATOR")
-	@TableGenerator(name = "ID_GENERATOR", allocationSize = 25)
+	@TableGenerator(name = "ID_GENERATOR", allocationSize = 25) // dibanding pakai table generator, pakai GenericGenerator disarankan karena punya full akses ke Hibernate. GenericGenerator jg support semua jenis identifier generator
+//	@GenericGenerator(strategy = "UUID", name = "ID_GENERATOR") // strategi disini lebih ke cara identifier digenerate, yang sequence atau tabel itu strategy ny adalah enchanced-sequence
 	private Long personNumber;
 	
 	public void setPersonNumber(Long personNumber) {

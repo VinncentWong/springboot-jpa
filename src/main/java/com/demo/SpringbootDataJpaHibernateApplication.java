@@ -18,11 +18,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.demo.entities.Email;
+import com.demo.entities.Event;
 import com.demo.entities.Location;
 import com.demo.entities.Message2;
 import com.demo.entities.Person;
 import com.demo.entities.Teacher;
 import com.demo.repository.EmailRepository;
+import com.demo.repository.EventRepository;
 import com.demo.repository.LocationRepository;
 import com.demo.repository.Message2Repository;
 import com.demo.repository.MessageRepository;
@@ -111,6 +113,11 @@ class ControllerCustom{
 	public void createTeacher() {
 		this.coba.createTeacher();
 	}
+	
+	@GetMapping("/createevent")
+	public void createEvent() {
+		this.coba.createEvent();
+	}
 }
 
 @Component
@@ -130,6 +137,9 @@ class Coba{
 	
 	@Autowired
 	private TeacherRepository teacherRepo;
+	
+	@Autowired
+	private EventRepository eventRepo;
 	
 	public void callOne() {
 		Message2 message2 = new Message2();
@@ -181,14 +191,26 @@ class Coba{
 	}
 	
 	public void createPerson() {
-		Person person = new Person();
-//		person.setPersonNumber("abcdefghijk");
-		this.personRepo.save(person);
+//		Person person = new Person();
+////		person.setPersonNumber("abcdefghijk");
+//		this.personRepo.save(person);
+		
+		for(int i = 0 ; i < 20 ; i++) {
+			Person person = new Person();
+			this.personRepo.save(person);
+		}
 	}
 	
 	public void createTeacher() {
-		Teacher teacher = new Teacher();
-		this.teacherRepo.save(teacher);
+		for(int i = 0 ; i < 20 ; i++) {
+			Teacher teacher = new Teacher();
+			this.teacherRepo.save(teacher);
+		}
+	}
+	
+	public void createEvent() {
+		Event event = new Event();
+		this.eventRepo.save(event);
 	}
 }
 
