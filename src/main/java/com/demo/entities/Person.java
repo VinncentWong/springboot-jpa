@@ -3,6 +3,7 @@ package com.demo.entities;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 
 @Entity
 public class Person {
@@ -14,7 +15,8 @@ public class Person {
 	}
 	
 	@Id
-	@GeneratedValue(generator = "uuid")
+	@GeneratedValue(generator = "ID_GENERATOR") // specify nama dari generator yang akan digunakan
+	@SequenceGenerator(name = "ID_GENERATOR", sequenceName = "GET_PERSON_NUMBER")
 	public String getPersonNumber() {
 		return this.personNumber;
 	}
