@@ -10,16 +10,19 @@ import javax.persistence.TableGenerator;
 @Entity
 public class Person {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.TABLE, generator = "ID_GENERATOR")
+	@TableGenerator(name = "ID_GENERATOR", allocationSize = 25)
 	private Long personNumber;
 	
 	public void setPersonNumber(Long personNumber) {
 		this.personNumber = personNumber;
 	}
 	
-	@Id
-	@GeneratedValue(generator = "ID_GENERATOR", strategy = GenerationType.TABLE) // specify nama dari generator yang akan digunakan
-//	@SequenceGenerator(name = "ID_GENERATOR", sequenceName = "GET_PERSON_NUMBER") // karena strategy pakai Table, pakai @TableGenerator buat handle masalah
-	@TableGenerator(name = "ID_GENERATOR", pkColumnName = "primary_key")
+//	@Id
+//	@GeneratedValue(generator = "ID_GENERATOR", strategy = GenerationType.TABLE) // specify nama tabel dari generator yang akan digunakan // generator = "nama_tabel_yang_akan_generate_primary_key"
+////	@SequenceGenerator(name = "ID_GENERATOR", sequenceName = "GET_PERSON_NUMBER") // spesifikasi nama sequence_generator nya, nama kolom, dsb.
+//	@TableGenerator(name = "ID_GENERATOR", allocationSize = 25) // speisfikasi nama dari tabel_generator nya
 	public Long getPersonNumber() {
 		return this.personNumber;
 	}
