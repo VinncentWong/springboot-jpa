@@ -26,8 +26,8 @@ public class Email {
 	
 	private String subject;
 	
-	@OneToOne(mappedBy = "email", cascade = CascadeType.ALL)
-	private Message2 message;
+	// @OneToOne(mappedBy = "email", cascade = CascadeType.ALL)
+	// private Message2 message;
 	
 	@OneToMany(mappedBy = "email", cascade = CascadeType.ALL)
 	private List<Location> location;

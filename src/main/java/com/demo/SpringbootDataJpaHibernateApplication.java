@@ -161,7 +161,7 @@ class Coba{
 		Message2 message = new Message2();
 		message.setContent("centwong");
 		message.setEmail(email);
-		email.setMessage(message);
+		// email.setMessage(message);
 		this.emailRepo.save(email);
 	}
 	

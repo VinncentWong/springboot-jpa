@@ -14,7 +14,6 @@ import lombok.Data;
 import lombok.ToString;
 
 @Data
-@Entity
 @ToString(exclude = "email")
 public class Message2 {
 
