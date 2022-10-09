@@ -228,13 +228,13 @@ class Coba{
 @Configuration
 class Config{
 	
-	@Bean
-	public DataSource dataSource() {
-		HikariDataSource hikari = new HikariDataSource();
-		hikari.setJdbcUrl("jdbc:mysql://localhost:3306/hibernate");
-		hikari.setUsername("root");
-		hikari.setPassword("");
-		hikari.setConnectionTimeout(3000);
-		return hikari;
-	}
+	// @Bean
+	// public DataSource dataSource() {
+	// 	HikariDataSource hikari = new HikariDataSource();
+	// 	hikari.setJdbcUrl("jdbc:mysql://localhost:3306/hibernate");
+	// 	hikari.setUsername("root");
+	// 	hikari.setPassword("");
+	// 	hikari.setConnectionTimeout(3000);
+	// 	return hikari;
+	// }
 }
