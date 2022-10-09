@@ -26,7 +26,7 @@ import com.demo.entities.Teacher;
 import com.demo.repository.EmailRepository;
 import com.demo.repository.EventRepository;
 import com.demo.repository.LocationRepository;
-import com.demo.repository.Message2Repository;
+// import com.demo.repository.Message2Repository;
 import com.demo.repository.MessageRepository;
 import com.demo.repository.PersonRepository;
 import com.demo.repository.TeacherRepository;
@@ -84,10 +84,10 @@ class ControllerCustom{
 		this.coba.callTwo();
 	}
 	
-	@GetMapping("/getmessage/{messageId}")
-	public Message2 getMessage(@PathVariable("messageId") Long id) {
-		return this.coba.getMessage(id);
-	}
+	// @GetMapping("/getmessage/{messageId}")
+	// public Message2 getMessage(@PathVariable("messageId") Long id) {
+	// 	return this.coba.getMessage(id);
+	// }
 	
 	@GetMapping("/getemail/{emailId}")
 	public Email getEmail(@PathVariable("emailId") Long id){
@@ -128,8 +128,8 @@ class ControllerCustom{
 @Component
 class Coba{
 	
-	@Autowired
-	private Message2Repository repository;
+	// @Autowired
+	// private Message2Repository repository;
 	
 	@Autowired
 	private EmailRepository emailRepo;
@@ -147,12 +147,12 @@ class Coba{
 	private EventRepository eventRepo;
 	
 	public void callOne() {
-		Message2 message2 = new Message2();
-		Email email = new Email();
-		message2.setContent("content1");
-		email.setSubject("centcentcent");
-		message2.setEmail(email);
-		this.repository.save(message2);
+		// Message2 message2 = new Message2();
+		// Email email = new Email();
+		// message2.setContent("content1");
+		// email.setSubject("centcentcent");
+		// message2.setEmail(email);
+		// this.repository.save(message2);
 	}
 	
 	public void callTwo() {
@@ -165,9 +165,9 @@ class Coba{
 		this.emailRepo.save(email);
 	}
 	
-	public Message2 getMessage(Long messageId) {
-		return this.repository.findById(messageId).get();
-	}
+	// public Message2 getMessage(Long messageId) {
+	// 	return this.repository.findById(messageId).get();
+	// }
 	
 	public Email getEmail(Long id) {
 		return this.emailRepo.findById(id).get();
